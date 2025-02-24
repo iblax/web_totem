@@ -1,0 +1,88 @@
+<GridLayout
+  // Layout e dimensioni
+  layout={layout}                // Array che definisce il layout degli elementi
+  cols={12}                     // Numero di colonne nella griglia (default: 12)
+  width={800}                   // Larghezza in pixel del container
+  rowHeight={30}                // Altezza in pixel di una riga (default: 30)
+  
+  // Margini e spaziatura
+  margin={[10, 10]}            // Margine [x, y] tra gli elementi in pixel
+  containerPadding={[10, 10]}  // Padding [x, y] del container in pixel
+  
+  // Comportamento Drag & Drop
+  isDraggable={true}           // Abilita/disabilita il drag and drop
+  isResizable={true}           // Abilita/disabilita il resize
+  preventCollision={false}     // Impedisce agli elementi di sovrapporsi
+  useCSSTransforms={true}      // Usa CSS3 transforms per il posizionamento
+  
+  // Compattazione
+  verticalCompact={true}       // Compatta gli elementi verticalmente
+  compactType="vertical"       // Tipo di compattazione ("vertical" | "horizontal" | null)
+  
+  // Limiti dimensionali
+  maxRows={Infinity}           // Numero massimo di righe
+  minW={1}                     // Larghezza minima di un elemento in colonne
+  maxW={Infinity}             // Larghezza massima di un elemento in colonne
+  minH={1}                     // Altezza minima di un elemento in righe
+  maxH={Infinity}             // Altezza massima di un elemento in righe
+  
+  // Event handlers
+  onLayoutChange={fn}          // Chiamata quando il layout cambia
+  onDragStart={fn}            // Chiamata quando inizia il drag
+  onDrag={fn}                 // Chiamata durante il drag
+  onDragStop={fn}             // Chiamata quando finisce il drag
+  onResizeStart={fn}          // Chiamata quando inizia il resize
+  onResize={fn}               // Chiamata durante il resize
+  onResizeStop={fn}           // Chiamata quando finisce il resize
+  
+  // Classi CSS
+  className="layout"           // Classe CSS aggiuntiva per il container
+  style={{}}                  // Stili inline per il container
+  
+  // Altre opzioni
+  autoSize={true}             // Ridimensiona automaticamente il container
+  draggableHandle=".drag-handle" // Selector CSS per l'area draggable
+  draggableCancel=".drag-cancel" // Selector CSS per aree non draggable
+  isBounded={false}           // Limita il movimento all'interno del container
+  transformScale={1}          // Scala di trasformazione per gli elementi
+/>
+
+<GridLayout
+  // Responsive
+  breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+  cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+  
+  // Animazioni
+  measureBeforeMount={false}   // Misura gli elementi prima del mount
+  useCSSTransforms={true}      // Usa CSS3 transforms per le animazioni
+  
+  // Performance
+  allowOverlap={false}         // Permette la sovrapposizione degli elementi
+  isDroppable={false}          // Abilita il drop di elementi esterni
+  
+  // Debug
+  onDragStart={(layout, oldItem, newItem, placeholder, e, element) => {}}
+  onDrag={(layout, oldItem, newItem, placeholder, e, element) => {}}
+  onDragStop={(layout, oldItem, newItem, placeholder, e, element) => {}}
+  
+  // Accessibilità
+  resizeHandles={['se']}      // Posizioni dei resize handles ('s','e','se')
+  draggableHandle=".custom-drag-handle"  // Area personalizzata per il drag
+/>
+
+const layout = [
+  { 
+    i: 'a',                    // ID univoco dell'elemento
+    x: 0,                      // Posizione X in colonne
+    y: 0,                      // Posizione Y in righe
+    w: 1,                      // Larghezza in colonne
+    h: 1,                      // Altezza in righe
+    minW: 1,                   // Larghezza minima
+    maxW: Infinity,            // Larghezza massima
+    minH: 1,                   // Altezza minima
+    maxH: Infinity,            // Altezza massima
+    static: false,             // Se true, l'elemento non è draggable/resizable
+    isDraggable: true,         // Sovrascrive isDraggable globale
+    isResizable: true,         // Sovrascrive isResizable globale
+  }
+];
