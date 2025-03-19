@@ -3,12 +3,12 @@ import GridLayout from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import { useSelector, useDispatch } from "react-redux";
-import { setLayout, fetchLayout, saveLayoutToServer, deleteItemLayout, setContainerStyle } from "../../redux/layoutSlice.js";
+import { setLayout, fetchLayout, saveLayoutToServer, deleteItemLayout, setContainerStyle } from "../../../redux/layoutSlice.js";
 import { Button, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import OpenWithRoundedIcon from '@mui/icons-material/OpenWithRounded';
 //import SelfieComponent from "../Camera/SelfieCamera.jsx"
-import componentMap from "./ComponentMap.js"
+import componentMap from "../ComponentMap.js"
 
 const MyGrid = ({ layoutId , cols = 12, rowHeight = 50, width= 1000, height=720, containerStyle = {} }) => {
   const dispatch = useDispatch();
@@ -90,8 +90,8 @@ const MyGrid = ({ layoutId , cols = 12, rowHeight = 50, width= 1000, height=720,
       rowHeight={rowHeight}
       width={width}
       height={height}
-      maxWidth={width}
       maxHeight={height} // to pass parameter
+      maxWidth={width}
       isDraggable={true}
       isResizable={true}
       verticalCompact={false}
