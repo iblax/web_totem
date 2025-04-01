@@ -7,13 +7,16 @@ import { setNewLayout, saveLayoutToServer } from "../../redux/layoutSlice.js";
 import { Button, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import OpenWithRoundedIcon from '@mui/icons-material/OpenWithRounded';
+import SettingsIcon from '@mui/icons-material/SettingsSuggest'
 import componentMap from "./ComponentMap.js"
 import ContainerSettings from './ContainerSettings.jsx'
+import DynamicSettingsForm from "./DinamicFormItem.jsx";
 const LayoutDrawer = forwardRef( ({ assignedLayout , cols = 24, width= 1000, height=720, isEditor=false }, ref) => {
   
     const dispatch = useDispatch();
     const [myLayout, setMyLayout ] = useState();
     const [openDialog, setOpenDialog] = useState(false)
+    const [openSettings, setOpenSettings] = useState(false)
   
     //CREARE INTERFACCIA MODIFICA COMPONENTI
 
@@ -102,6 +105,15 @@ const LayoutDrawer = forwardRef( ({ assignedLayout , cols = 24, width= 1000, hei
         }));
         }
     };
+
+    const showSettings = (targetId, component) => {
+      const selectedSettings = myLayout?.gridItems.filter(item => item.i === targetId);
+      console.info("id", targetId)
+      console.info("Layout", myLayout)
+      console.info("Settings", selectedSettings)
+      console.info("Settings", component)
+      setOpenSettings(true)
+    }
 
     const SaveLayout = () => {
         dispatch(setNewLayout(myLayout));   
@@ -192,7 +204,18 @@ const LayoutDrawer = forwardRef( ({ assignedLayout , cols = 24, width= 1000, hei
                         padding: "2px",
                         boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
                         }}
-                        />
+                      />
+                      <SettingsIcon 
+                      onClick={() => showSettings(i, Component)}
+                      style={{ 
+                        color:"white",
+                        margin:"5",
+                        cursor: "grab", 
+                        backgroundColor: "rgba(0,0,0,0.2)",
+                        borderRadius: "5",
+                        padding: "2px",
+                        boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+                        }}/>
                     </Box>
                     )}
                 </div>
@@ -213,6 +236,14 @@ const LayoutDrawer = forwardRef( ({ assignedLayout , cols = 24, width= 1000, hei
             setContainer={updateContainer}
             onClose={() => setOpenDialog(false)}
         />
+
+        <DynamicSettingsForm
+          open={openSettings}
+          onClose={() => setOpenSettings(false)}/>
+
+          {/* 
+            Mettere su DB Tabella Component con ID e Settings default // oppure metterlo gia nel componente
+          */}
   </Box>
   );
 });

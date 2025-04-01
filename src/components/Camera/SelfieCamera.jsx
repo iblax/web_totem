@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 
-const SelfieCamera = () => {
+const SelfieCamera = ({ settings = {buttonText: "Ciao"} }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [photo, setPhoto] = useState(null);
@@ -65,7 +65,8 @@ const SelfieCamera = () => {
           color: "white",
           cursor: "pointer"
         }}>
-        📸 Scatta Foto
+        {/*📸 Scatta Foto */}
+        {settings.buttonText}
       </button>
       {photo && (
         <div style={{ marginTop: "10px" }}>
